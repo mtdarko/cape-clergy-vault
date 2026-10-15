@@ -46,7 +46,7 @@ function Review() {
   );
 }
 
-type Item = { id: string; title: string; kind: string; category: string; abstract: string; keywords: string; status: string; dean_notes: string; file_path: string | null; created_at: string; author?: { title: string; full_name: string; parish: string } };
+type Item = { id: string; title: string; kind: string; category: string; abstract: string; keywords: string; status: string; dean_notes: string; file_path: string | null; created_at: string; author?: { title: string; full_name: string; parish: string } | undefined };
 
 function ReviewItem({ s }: { s: Item }) {
   const qc = useQueryClient();

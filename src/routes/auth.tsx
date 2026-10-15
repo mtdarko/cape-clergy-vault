@@ -39,7 +39,7 @@ function AuthPage() {
         navigate({ to: "/dashboard" });
       } else {
         const parsed = registerSchema.safeParse(f);
-        if (!parsed.success) { toast.error(parsed.error.issues[0].message); return; }
+        if (!parsed.success) { toast.error(parsed.error.issues[0]?.message ?? "Invalid input"); return; }
         const { popia: _p, email, password, ...meta } = parsed.data;
         const { data, error } = await supabase.auth.signUp({
           email, password,

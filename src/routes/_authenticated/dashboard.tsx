@@ -80,14 +80,14 @@ function ConsentGate({ userId, initial }: { userId: string; initial: { title: st
 
 function SubmitForm({ userId }: { userId: string }) {
   const qc = useQueryClient();
-  const [f, setF] = useState({ kind: "document" as "document" | "idea", title: "", category: CATEGORIES[0], abstract: "", keywords: "" });
+  const [f, setF] = useState({ kind: "document" as "document" | "idea", title: "", category: "Sermon / Homily", abstract: "", keywords: "" });
   const [file, setFile] = useState<File | null>(null);
   const [busy, setBusy] = useState(false);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     const p = submissionSchema.safeParse(f);
-    if (!p.success) { toast.error(p.error.issues[0].message); return; }
+    if (!p.success) { toast.error(p.error.issues[0]?.message ?? "Invalid input"); return; }
     if (f.kind === "document" && !file) { toast.error("Please attach your document"); return; }
     if (file && !fileAllowed(file.name, file.size)) { toast.error("Use PDF, Word, ODT, RTF or TXT under 25MB"); return; }
     setBusy(true);
