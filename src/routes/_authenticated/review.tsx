@@ -37,7 +37,7 @@ function Review() {
       <h1 className="text-4xl font-semibold text-primary">Dean's review</h1>
       <div className="mt-6 flex flex-wrap gap-2">
         {[["open", "Awaiting review"], ["accepted", "Accepted"], ["returned", "Returned"], ["all", "All"]].map(([k, l]) => (
-          <Button key={k} size="sm" variant={filter === k ? "default" : "outline"} onClick={() => setFilter(k)}>{l}</Button>
+          <Button key={k} size="sm" variant={filter === k ? "default" : "outline"} onClick={() => setFilter(k ?? "all")}>{l}</Button>
         ))}
       </div>
       {!items.length && <p className="mt-6 text-sm text-muted-foreground">Nothing here.</p>}
