@@ -164,7 +164,7 @@ function MySubmissions() {
             <p className="mt-2 line-clamp-3 text-sm">{s.abstract}</p>
             {s.dean_notes && <p className="mt-2 rounded bg-muted p-2 text-sm"><strong>Dean's note:</strong> {s.dean_notes}</p>}
             <div className="mt-2 flex gap-2">
-              {s.file_path && <Button size="sm" variant="outline" onClick={() => openFile(s.file_path!)}>Open file</Button>}
+              {s.file_path && <Button size="sm" variant="outline" onClick={() => openFile(s.id)}>Open file</Button>}
               {s.status === "submitted" && <Button size="sm" variant="ghost" onClick={() => withdraw(s.id, s.file_path)}>Withdraw</Button>}
             </div>
           </li>

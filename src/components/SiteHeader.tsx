@@ -48,6 +48,7 @@ export function SiteHeader() {
             <>
               <Link to="/dashboard" className="rounded px-3 py-2 hover:bg-accent" activeProps={{ className: "bg-accent" }}>My submissions</Link>
               <Link to="/repository" className="rounded px-3 py-2 hover:bg-accent" activeProps={{ className: "bg-accent" }}>Repository</Link>
+              {!isAdmin && <Link to="/verify-reviewer" className="rounded px-3 py-2 text-muted-foreground hover:bg-accent">Reviewer access</Link>}
               {isAdmin && <Link to="/review" className="rounded px-3 py-2 hover:bg-accent" activeProps={{ className: "bg-accent" }}>Dean's review</Link>}
               <Button variant="outline" size="sm" className="ml-2" onClick={signOut}>Sign out</Button>
             </>
