@@ -1,7 +1,8 @@
 # Roadmap
-- [ ] Dean account verification (email OTP re-check) before granting review role; queue locked until verified
-- [ ] Per-submission confidentiality: confidential items visible only to author and reviewers
-- [ ] Private storage + short-lived links enforcing per-submission permissions
-- [ ] Immediate reviewer revocation: remove role, end sessions, block confidential files
-- [ ] Immutable audit trail: verification, role changes, downloads, denials
-- [ ] Alerts: repeated denials / unusual downloads (no confidential content, enough context)
+- [x] Dean account verification before granting review role
+- [x] Per-submission confidentiality
+- [x] Private storage + short-lived links per request
+- [x] Immediate reviewer revocation
+- [x] Immutable audit trail
+- [x] Alerts for denials / unusual downloads
+- [ ] First reviewer authorisation — waiting on the Dean's email address

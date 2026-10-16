@@ -25,7 +25,7 @@ function Verify() {
     setBusy(true);
     const { error } = await supabase.auth.signInWithOtp({ email, options: { shouldCreateUser: false } });
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     setSent(true); toast.success("Code sent to your email");
   };
   const confirm = async () => {
