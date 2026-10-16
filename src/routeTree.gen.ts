@@ -15,6 +15,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedRepositoryRouteImport } from './routes/_authenticated/repository'
 import { Route as AuthenticatedReviewRouteImport } from './routes/_authenticated/review'
+import { Route as AuthenticatedVerifyReviewerRouteImport } from './routes/_authenticated/verify-reviewer'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -45,6 +46,12 @@ const AuthenticatedReviewRoute = AuthenticatedReviewRouteImport.update({
   path: '/review',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedVerifyReviewerRoute =
+  AuthenticatedVerifyReviewerRouteImport.update({
+    id: '/verify-reviewer',
+    path: '/verify-reviewer',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -52,6 +59,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/repository': typeof AuthenticatedRepositoryRoute
   '/review': typeof AuthenticatedReviewRoute
+  '/verify-reviewer': typeof AuthenticatedVerifyReviewerRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -59,6 +67,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/repository': typeof AuthenticatedRepositoryRoute
   '/review': typeof AuthenticatedReviewRoute
+  '/verify-reviewer': typeof AuthenticatedVerifyReviewerRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -68,12 +77,25 @@ export interface FileRoutesById {
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/repository': typeof AuthenticatedRepositoryRoute
   '/_authenticated/review': typeof AuthenticatedReviewRoute
+  '/_authenticated/verify-reviewer': typeof AuthenticatedVerifyReviewerRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/dashboard' | '/repository' | '/review'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/dashboard'
+    | '/repository'
+    | '/review'
+    | '/verify-reviewer'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/dashboard' | '/repository' | '/review'
+  to:
+    | '/'
+    | '/auth'
+    | '/dashboard'
+    | '/repository'
+    | '/review'
+    | '/verify-reviewer'
   id:
     | '__root__'
     | '/'
@@ -82,6 +104,7 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard'
     | '/_authenticated/repository'
     | '/_authenticated/review'
+    | '/_authenticated/verify-reviewer'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -134,6 +157,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedReviewRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/verify-reviewer': {
+      id: '/_authenticated/verify-reviewer'
+      path: '/verify-reviewer'
+      fullPath: '/verify-reviewer'
+      preLoaderRoute: typeof AuthenticatedVerifyReviewerRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
@@ -141,12 +171,14 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedRepositoryRoute: typeof AuthenticatedRepositoryRoute
   AuthenticatedReviewRoute: typeof AuthenticatedReviewRoute
+  AuthenticatedVerifyReviewerRoute: typeof AuthenticatedVerifyReviewerRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedRepositoryRoute: AuthenticatedRepositoryRoute,
   AuthenticatedReviewRoute: AuthenticatedReviewRoute,
+  AuthenticatedVerifyReviewerRoute: AuthenticatedVerifyReviewerRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =

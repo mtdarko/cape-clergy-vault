@@ -1,0 +1,8 @@
+# Roadmap
+- [x] Dean account verification before granting review role
+- [x] Per-submission confidentiality
+- [x] Private storage + short-lived links per request
+- [x] Immediate reviewer revocation
+- [x] Immutable audit trail
+- [x] Alerts for denials / unusual downloads
+- [ ] First reviewer authorisation — waiting on the Dean's email address

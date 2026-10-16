@@ -81,6 +81,7 @@ function ConsentGate({ userId, initial }: { userId: string; initial: { title: st
 function SubmitForm({ userId }: { userId: string }) {
   const qc = useQueryClient();
   const [f, setF] = useState({ kind: "document" as "document" | "idea", title: "", category: "Sermon / Homily", abstract: "", keywords: "" });
+  const [confidential, setConfidential] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [busy, setBusy] = useState(false);
 
@@ -97,7 +98,7 @@ function SubmitForm({ userId }: { userId: string }) {
       const { error } = await supabase.storage.from("submissions").upload(file_path, file);
       if (error) { toast.error(error.message); setBusy(false); return; }
     }
-    const { error } = await supabase.from("submissions").insert({ ...p.data, user_id: userId, file_path, file_name: file?.name ?? null });
+    const { error } = await supabase.from("submissions").insert({ ...p.data, user_id: userId, file_path, file_name: file?.name ?? null, confidential });
     setBusy(false);
     if (error) { toast.error(error.message); return; }
     toast.success("Submitted to the Dean for review");
@@ -126,6 +127,7 @@ function SubmitForm({ userId }: { userId: string }) {
       <div><Label>{f.kind === "idea" ? "Supporting file (optional)" : "Document"}</Label>
         <Input className="mt-1" type="file" accept=".pdf,.doc,.docx,.odt,.txt,.rtf" onChange={(e) => setFile(e.target.files?.[0] ?? null)} />
       </div>
+      <label className="flex items-start gap-2 text-sm"><Checkbox checked={confidential} onCheckedChange={(v) => setConfidential(v === true)} className="mt-0.5" /><span>Confidential — only you and authorised reviewers may ever open this, even if accepted.</span></label>
       <Button type="submit" className="w-full" disabled={busy}>{busy ? "Submitting…" : "Submit to the Dean"}</Button>
     </form>
   );
@@ -162,7 +164,7 @@ function MySubmissions() {
             <p className="mt-2 line-clamp-3 text-sm">{s.abstract}</p>
             {s.dean_notes && <p className="mt-2 rounded bg-muted p-2 text-sm"><strong>Dean's note:</strong> {s.dean_notes}</p>}
             <div className="mt-2 flex gap-2">
-              {s.file_path && <Button size="sm" variant="outline" onClick={() => openFile(s.file_path!)}>Open file</Button>}
+              {s.file_path && <Button size="sm" variant="outline" onClick={() => openFile(s.id)}>Open file</Button>}
               {s.status === "submitted" && <Button size="sm" variant="ghost" onClick={() => withdraw(s.id, s.file_path)}>Withdraw</Button>}
             </div>
           </li>

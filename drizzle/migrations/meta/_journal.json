@@ -8,6 +8,20 @@
       "when": 1792087255361,
       "tag": "0000_migration",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1792122713600,
+      "tag": "0001_dean_verification_and_confidential",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1792122788749,
+      "tag": "0002_audit_log",
+      "breakpoints": true
     }
   ]
 }

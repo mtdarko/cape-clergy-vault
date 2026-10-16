@@ -14,6 +14,42 @@ export type Database = {
   }
   public: {
     Tables: {
+      audit_log: {
+        Row: {
+          action: string
+          actor_email: string | null
+          actor_id: string | null
+          at: string
+          detail: string
+          id: number
+          outcome: string
+          submission_id: string | null
+          target_user: string | null
+        }
+        Insert: {
+          action: string
+          actor_email?: string | null
+          actor_id?: string | null
+          at?: string
+          detail?: string
+          id?: never
+          outcome?: string
+          submission_id?: string | null
+          target_user?: string | null
+        }
+        Update: {
+          action?: string
+          actor_email?: string | null
+          actor_id?: string | null
+          at?: string
+          detail?: string
+          id?: never
+          outcome?: string
+          submission_id?: string | null
+          target_user?: string | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string
@@ -47,10 +83,35 @@ export type Database = {
         }
         Relationships: []
       }
+      reviewer_invites: {
+        Row: {
+          created_at: string
+          email: string
+          failed_attempts: number
+          used_at: string | null
+          used_by: string | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          failed_attempts?: number
+          used_at?: string | null
+          used_by?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          failed_attempts?: number
+          used_at?: string | null
+          used_by?: string | null
+        }
+        Relationships: []
+      }
       submissions: {
         Row: {
           abstract: string
           category: string
+          confidential: boolean
           created_at: string
           dean_notes: string
           file_name: string | null
@@ -65,6 +126,7 @@ export type Database = {
         Insert: {
           abstract?: string
           category?: string
+          confidential?: boolean
           created_at?: string
           dean_notes?: string
           file_name?: string | null
@@ -79,6 +141,7 @@ export type Database = {
         Update: {
           abstract?: string
           category?: string
+          confidential?: boolean
           created_at?: string
           dean_notes?: string
           file_name?: string | null

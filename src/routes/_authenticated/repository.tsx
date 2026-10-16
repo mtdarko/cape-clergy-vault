@@ -44,7 +44,7 @@ function Repository() {
             <h2 className="mt-2 text-xl font-semibold">{s.title}</h2>
             <p className="mt-2 line-clamp-4 text-sm text-muted-foreground">{s.abstract}</p>
             {s.keywords && <p className="mt-2 text-xs text-muted-foreground">Keywords: {s.keywords}</p>}
-            {s.file_path && <Button size="sm" variant="outline" className="mt-3" onClick={() => openFile(s.file_path!)}>Read document</Button>}
+            {s.file_path && <Button size="sm" variant="outline" className="mt-3" onClick={() => openFile(s.id)}>Read document</Button>}
           </article>
         ))}
       </div>
