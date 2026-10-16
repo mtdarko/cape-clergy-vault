@@ -3,3 +3,5 @@
 - [ ] Per-submission confidentiality: confidential items visible only to author and reviewers
 - [ ] Private storage + short-lived links enforcing per-submission permissions
 - [ ] Immediate reviewer revocation: remove role, end sessions, block confidential files
+- [ ] Immutable audit trail: verification, role changes, downloads, denials
+- [ ] Alerts: repeated denials / unusual downloads (no confidential content, enough context)
