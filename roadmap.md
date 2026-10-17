@@ -1,4 +1,7 @@
 # Roadmap
+- [ ] Replace office wording with TEFT
+- [ ] Private clergy–TEFT chat with POPIA and reviewer access checks
+- [ ] Home-screen PWA installation (no offline caching)
 - [x] Dean account verification before granting review role
 - [x] Per-submission confidentiality
 - [x] Private storage + short-lived links per request
