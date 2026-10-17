@@ -35,19 +35,20 @@ export function SiteHeader() {
 
   return (
     <header className="border-b border-border bg-card/80 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-4">
+      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-4">
         <Link to="/" className="flex items-center gap-3">
           <span className="font-serif text-3xl leading-none text-primary">✠</span>
-          <span className="leading-tight">
-            <span className="block font-serif text-lg font-semibold">Theological Repository</span>
-            <span className="block text-xs text-muted-foreground">Anglican Diocese of Cape Town</span>
+          <span className="min-w-0 leading-tight">
+            <span className="block font-serif text-lg font-semibold">TEFT Repository</span>
+            <span className="block text-xs text-muted-foreground">Theological Education Formation and Training</span>
           </span>
         </Link>
-        <nav className="flex items-center gap-1 text-sm">
+        <nav className="flex flex-wrap items-center gap-1 text-sm">
           {email ? (
             <>
               <Link to="/dashboard" className="rounded px-3 py-2 hover:bg-accent" activeProps={{ className: "bg-accent" }}>My submissions</Link>
               <Link to="/repository" className="rounded px-3 py-2 hover:bg-accent" activeProps={{ className: "bg-accent" }}>Repository</Link>
+              <Link to="/chat" className="rounded px-3 py-2 hover:bg-accent" activeProps={{ className: "bg-accent" }}>Chat</Link>
               {!isAdmin && <Link to="/verify-reviewer" className="rounded px-3 py-2 text-muted-foreground hover:bg-accent">Reviewer access</Link>}
               {isAdmin && <Link to="/review" className="rounded px-3 py-2 hover:bg-accent" activeProps={{ className: "bg-accent" }}>Dean's review</Link>}
               <Button variant="outline" size="sm" className="ml-2" onClick={signOut}>Sign out</Button>

@@ -12,7 +12,7 @@ import { StatusBadge, openFile } from "@/components/submission-utils";
 import { listReviewers, inviteReviewer, revokeReviewer, getAuditAndAlerts } from "@/lib/reviewer.functions";
 
 export const Route = createFileRoute("/_authenticated/review")({
-  head: () => ({ meta: [{ title: "Dean's review — Theological Repository" }, { name: "description", content: "Review clergy submissions." }] }),
+  head: () => ({ meta: [{ title: "Dean's review — Theological Repository" }, { name: "description", content: "Review clergy submissions." }, { property: "og:title", content: "Dean's review — Theological Repository" }, { property: "og:description", content: "Review clergy submissions." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
   beforeLoad: async () => {
     const { data: u } = await supabase.auth.getUser();
     const { data: isAdmin } = await supabase.rpc("has_role", { _user_id: u.user!.id, _role: "admin" });

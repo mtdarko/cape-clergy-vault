@@ -14,9 +14,11 @@ export const Route = createFileRoute("/auth")({
   head: () => ({
     meta: [
       { title: "Clergy sign in & registration — Theological Repository" },
-      { name: "description", content: "Register as clergy and acknowledge POPIA to submit documents to the Dean of Theological Studies." },
+      { name: "description", content: "Register as clergy and acknowledge POPIA to submit documents to the TEFT." },
       { property: "og:title", content: "Clergy sign in & registration" },
       { property: "og:description", content: "Register and acknowledge POPIA to access the theological repository." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: AuthPage,

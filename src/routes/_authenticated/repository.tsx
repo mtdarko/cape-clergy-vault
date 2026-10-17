@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { openFile } from "@/components/submission-utils";
 
 export const Route = createFileRoute("/_authenticated/repository")({
-  head: () => ({ meta: [{ title: "Repository — Theological Repository" }, { name: "description", content: "Accepted theological works shared among clergy." }] }),
+  head: () => ({ meta: [{ title: "Repository — Theological Repository" }, { name: "description", content: "Accepted theological works shared among clergy." }, { property: "og:title", content: "Repository — Theological Repository" }, { property: "og:description", content: "Accepted theological works shared among clergy." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
   component: Repository,
 });
 

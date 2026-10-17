@@ -1,13 +1,14 @@
 import { z } from "zod";
 
-export const POPIA_VERSION = "2026-10";
+export const POPIA_VERSION = "2026-10-17";
 
 export const POPIA_POINTS = [
-  "The Office of the Dean of Theological Studies (Anglican Diocese of Cape Town) is the responsible party for the personal information you provide.",
-  "We collect your name, clerical title, parish, contact details and the documents and ideas you submit, solely to manage theological contributions and review.",
+  "Theological Education Formation and Training (TEFT) (Anglican Diocese of Cape Town) is the responsible party for the personal information you provide.",
+  "We collect your name, clerical title, parish, contact details and the documents and ideas you submit, solely to manage theological contributions, review and private clergy–TEFT conversations.",
   "Your submissions are visible only to you and the Dean's review team until the Dean accepts them for wider sharing within the repository.",
+  "Chat messages are private between you and currently authorised TEFT reviewers. Do not include sensitive pastoral details or third-party personal information without their consent.",
   "Your information will not be sold or shared with third parties without your consent, and is stored securely.",
-  "You may request access to, correction of, or deletion of your personal information at any time by contacting the Dean's office.",
+  "You may request access to, correction of, or deletion of your personal information at any time by contacting TEFT.",
   "You confirm you have the right to submit any document you upload and that it contains no third-party personal information without their consent.",
 ];
 
