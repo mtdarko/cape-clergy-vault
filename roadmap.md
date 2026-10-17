@@ -1,9 +1,11 @@
 # Roadmap
-- [ ] New-message push notifications and conversation mute controls
-- [ ] Offline message drafts and automatic sending on reconnect
+- [x] Per-user conversation mute controls
+- [ ] New-message push delivery — waiting for Firebase Messaging connection with Include web push (connection declined)
+- [x] Offline message drafts and automatic sending on reconnect while the app is open
+- [ ] Signed-in mute and reconnect verification — waiting for preview sign-in; published offline launch verification waits for publication
 - [x] Replace office wording with TEFT
 - [x] Private clergy–TEFT chat with POPIA and reviewer access checks
-- [x] Home-screen PWA installation (no offline caching)
+- [x] Home-screen PWA installation with guarded offline draft support
 - [ ] Signed-in message send/read verification — waiting for the user to sign in to the preview (no matching account for managed test sign-in)
 - [x] Dean account verification before granting review role
 - [x] Per-submission confidentiality
