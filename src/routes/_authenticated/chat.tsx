@@ -1,12 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import { useEffect, useRef, useState } from "react";
-import { MessageCircle, Send } from "lucide-react";
-import { toast } from "sonner";
-import { supabase } from "@/integrations/supabase/client";
+import { MessageCircle, Bell } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { chatMessageSchema } from "@/lib/chat";
+import { OfflineComposer } from "@/components/OfflineComposer";
+import { ConversationMute } from "@/components/ConversationMute";
 import { chatQueryOptions } from "@/lib/chat-query";
 
 export const Route = createFileRoute("/_authenticated/chat")({
@@ -38,13 +36,15 @@ function Chat() {
   return (
     <main className="mx-auto max-w-6xl px-6 py-10">
       <div className="flex items-center gap-3"><MessageCircle className="size-7 text-primary" /><h1 className="text-4xl font-semibold text-primary">TEFT chat</h1></div>
+      <p className="mt-3 flex items-center gap-2 text-sm text-muted-foreground"><Bell className="size-4 shrink-0" />Push notifications are not connected yet.</p>
+      <Button asChild variant="ghost" size="sm" className="mt-2"><Link to="/offline">Offline drafts</Link></Button>
       <div className={`mt-8 grid gap-6 ${data.admin ? "md:grid-cols-[240px_minmax(0,1fr)]" : ""}`}>
         {data.admin && <aside className="min-w-0"><h2 className="text-xl">Conversations</h2><div className="mt-4 flex flex-col gap-2">{owners.map((id) => {
           const p = data.people.find((entry) => entry.id === id);
           return <Button key={id} variant={id === ownerId ? "secondary" : "ghost"} className="h-auto justify-start whitespace-normal py-3 text-left" onClick={() => setSelected(id)}><span><span className="block">{p ? `${p.title} ${p.full_name}` : "Clergy member"}</span><span className="block text-xs text-muted-foreground">{p?.parish}</span></span></Button>;
         })}{!owners.length && <p className="text-sm text-muted-foreground">No conversations yet.</p>}</div></aside>}
         <section className="min-w-0 rounded-md border border-border bg-card" aria-label="Private conversation">
-          <h2 className="border-b border-border px-5 py-4 text-xl">{data.admin && person ? `${person.title} ${person.full_name}` : "Theological Education Formation and Training (TEFT)"}</h2>
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border px-5 py-4"><h2 className="min-w-0 text-xl">{data.admin && person ? `${person.title} ${person.full_name}` : "Theological Education Formation and Training (TEFT)"}</h2>{ownerId && <ConversationMute key={ownerId} ownerId={ownerId} userId={data.userId} />}</div>
           <div className="h-[420px] overflow-y-auto px-5 py-6" role="log" aria-label="Messages" aria-live="polite">
             {!messages.length && <p className="text-sm text-muted-foreground">{data.admin ? "Select a clergy conversation." : "No messages yet."}</p>}
             <div className="space-y-5">{messages.map((m) => <article key={m.id} className={`max-w-[90%] ${m.sender_id === data.userId ? "ml-auto border-l-2 border-primary pl-4" : "border-l-2 border-border pl-4"}`}>
@@ -52,29 +52,9 @@ function Chat() {
               <p className="mt-2 whitespace-pre-wrap break-words text-sm [overflow-wrap:anywhere]">{m.body}</p>
             </article>)}</div><div ref={bottom} />
           </div>
-          {ownerId && <Composer key={ownerId} ownerId={ownerId} userId={data.userId} />}
+          {ownerId && <OfflineComposer key={ownerId} ownerId={ownerId} userId={data.userId} />}
         </section>
       </div>
     </main>
   );
-}
-
-function Composer({ ownerId, userId }: { ownerId: string; userId: string }) {
-  const [body, setBody] = useState("");
-  const [busy, setBusy] = useState(false);
-  const qc = useQueryClient();
-  const send = async (event: React.FormEvent) => {
-    event.preventDefault();
-    const parsed = chatMessageSchema.safeParse(body);
-    if (!parsed.success) { toast.error(parsed.error.issues[0]?.message ?? "Invalid message"); return; }
-    setBusy(true);
-    try {
-      const { error } = await supabase.from("chat_messages").insert({ owner_id: ownerId, sender_id: userId, body: parsed.data });
-      if (error) throw error;
-      setBody("");
-      await qc.invalidateQueries({ queryKey: ["chat"] });
-    } catch { toast.error("Message not sent. Please check your access and try again."); }
-    finally { setBusy(false); }
-  };
-  return <form onSubmit={send} className="border-t border-border p-4"><Textarea aria-label="Message" placeholder="Your message to TEFT…" value={body} onChange={(e) => setBody(e.target.value)} maxLength={4000} rows={3} disabled={busy} /><div className="mt-3 flex items-center justify-between gap-3"><span className="text-xs text-muted-foreground">{body.length} / 4,000</span><Button type="submit" disabled={busy || !body.trim()}><Send className="size-4" />{busy ? "Sending…" : "Send"}</Button></div></form>;
 }

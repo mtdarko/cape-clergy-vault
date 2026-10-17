@@ -20,4 +20,6 @@
 
 - Private chat uses one owner-scoped message stream per clergy account, RLS, current notice consent and live reviewer roles; no client edits or deletions. Why: shared TEFT review access without exposing conversations to other clergy.
 - Chat is loaded through authenticated route query options and refreshed while open. Why: keep initial loading and permission rechecks consistent.
-- Home-screen installation uses a manifest and local icons only, without an app-shell service worker. Why: installability without offline caching or stale preview risk.
+- Offline installation uses vite-plugin-pwa generateSW and one guarded registration wrapper; no worker in preview/dev, OAuth and APIs excluded. Why: offline draft access without stale previews or caching private responses.
+- Offline drafts/outbox use user-scoped IndexedDB and stable message UUIDs; delivery revalidates the current account and relies on live RLS, with blocked-message retries explicit and local data cleared on sign-out. Why: avoid cross-account delivery and duplicate sends.
+- Conversation mute preferences live in RLS-protected per-user rows; future push recipients must be filtered by live roles, consent and mute before delivery. Why: notifications cannot bypass private chat permissions.
