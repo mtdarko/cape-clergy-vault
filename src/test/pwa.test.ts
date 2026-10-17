@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { refusesAppWorker } from "@/lib/pwa-registration";
+import { refusesAppWorker } from "@/lib/pwa-safety";
 const published = { production: true, framed: false, hostname: "cape-clergy-vault.lovable.app", search: "" };
 describe("offline worker safety", () => {
   it("allows published apps only", () => {

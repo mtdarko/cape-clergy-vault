@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { useEffect, useRef, useState } from "react";
 import { MessageCircle, Bell } from "lucide-react";
 import { Button } from "@/components/ui/button";

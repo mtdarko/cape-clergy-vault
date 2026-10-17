@@ -20,10 +20,9 @@ export default defineConfig({
         globPatterns: ["**/*.{js,css,png,ico,webmanifest}"],
         // No cached private conversations or API responses: offline has a dedicated draft-only page.
         additionalManifestEntries: [{ url: "/offline", revision: "offline-drafts-v1" }],
-        navigateFallback: "/offline",
-        navigateFallbackDenylist: [/^\/~oauth/, /^\/api\//, /^\/auth/],
+        navigateFallback: null,
         runtimeCaching: [
-          { urlPattern: ({ request, url }) => request.mode === "navigate" && url.origin === self.location.origin && !/^\/(~oauth|api|auth)/.test(url.pathname), handler: "NetworkFirst", options: { cacheName: "teft-public-navigations", networkTimeoutSeconds: 5, cacheableResponse: { statuses: [200] }, expiration: { maxEntries: 8, maxAgeSeconds: 86400 } } },
+          { urlPattern: ({ request, url }) => request.mode === "navigate" && url.origin === self.location.origin && !/^\/(~oauth|api|auth)/.test(url.pathname), handler: "NetworkFirst", options: { cacheName: "teft-public-navigations", networkTimeoutSeconds: 5, precacheFallback: { fallbackURL: "/offline" }, cacheableResponse: { statuses: [200] }, expiration: { maxEntries: 8, maxAgeSeconds: 86400 } } },
           { urlPattern: ({ url }) => url.origin === self.location.origin && /\/assets\/.*-[\w-]{8,}\.(js|css|png|woff2)$/.test(url.pathname), handler: "CacheFirst", options: { cacheName: "teft-hashed-assets", expiration: { maxEntries: 100, maxAgeSeconds: 2592000 } } },
         ],
       },
