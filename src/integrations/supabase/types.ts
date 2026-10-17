@@ -89,6 +89,39 @@ export type Database = {
           },
         ]
       }
+      chat_notification_preferences: {
+        Row: {
+          muted: boolean
+          owner_id: string
+          user_id: string
+        }
+        Insert: {
+          muted?: boolean
+          owner_id: string
+          user_id: string
+        }
+        Update: {
+          muted?: boolean
+          owner_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "chat_notification_preferences_owner_id_fkey"
+            columns: ["owner_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "chat_notification_preferences_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           created_at: string
