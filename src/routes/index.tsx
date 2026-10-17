@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
+import crestAsset from "@/assets/logo-diocese-of-cape-town.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -25,15 +26,20 @@ const steps = [
 function Index() {
   return (
     <main>
-      <section className="mx-auto max-w-6xl px-6 pb-16 pt-20">
-        <p className="text-sm uppercase tracking-[0.25em] text-gold">Theological Education Formation and Training (TEFT)</p>
-        <h1 className="mt-4 max-w-3xl text-5xl font-semibold leading-tight text-primary md:text-6xl">
+      <section className="mx-auto max-w-4xl px-6 pb-16 pt-16 text-center">
+        <div className="mx-auto flex h-36 w-36 items-center justify-center rounded-full border border-gold/40 bg-crest shadow-sm">
+          <img src={crestAsset.url} alt="Coat of arms of the Anglican Diocese of Cape Town" className="h-24 w-auto" />
+        </div>
+        <p className="mt-7 text-sm font-bold uppercase tracking-[0.16em] text-primary md:text-base">
+          Theological Education Formation and Training (TEFT)
+        </p>
+        <h1 className="mx-auto mt-3 max-w-2xl text-3xl font-semibold leading-snug text-primary md:text-4xl">
           A repository for the theological work of our clergy
         </h1>
-        <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
+        <p className="mx-auto mt-5 max-w-2xl text-base text-muted-foreground md:text-lg">
           Preserve and share sermons, research, liturgical writing and new ideas across the Anglican Diocese of Cape Town — with care for every contributor's privacy under POPIA.
         </p>
-        <div className="mt-8 flex flex-wrap gap-3">
+        <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Button asChild size="lg"><Link to="/auth">Register as clergy</Link></Button>
           <Button asChild size="lg" variant="outline"><Link to="/repository">Browse the repository</Link></Button>
         </div>

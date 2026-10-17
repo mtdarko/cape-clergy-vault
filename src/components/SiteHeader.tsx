@@ -37,7 +37,7 @@ export function SiteHeader() {
     <header className="border-b border-border bg-card/80 backdrop-blur">
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-4">
         <Link to="/" className="flex items-center gap-3">
-          <span className="font-serif text-3xl leading-none text-primary">✠</span>
+          <img src={crestAsset.url} alt="Coat of arms of the Anglican Diocese of Cape Town" className="h-11 w-auto shrink-0" />
           <span className="min-w-0 leading-tight">
             <span className="block font-serif text-lg font-semibold">TEFT Repository</span>
             <span className="block text-xs text-muted-foreground">Theological Education Formation and Training</span>
