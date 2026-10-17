@@ -1,4 +1,6 @@
 # Roadmap
+- [ ] New-message push notifications and conversation mute controls
+- [ ] Offline message drafts and automatic sending on reconnect
 - [x] Replace office wording with TEFT
 - [x] Private clergy–TEFT chat with POPIA and reviewer access checks
 - [x] Home-screen PWA installation (no offline caching)
