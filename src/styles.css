@@ -31,6 +31,7 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-crest: var(--crest);
 }
 
 :root {
@@ -55,6 +56,7 @@
   --border: oklch(0.87 0.025 80);
   --input: oklch(0.87 0.025 80);
   --ring: oklch(0.36 0.12 20);
+  --crest: oklch(1 0 0);
 }
 
 @layer base {

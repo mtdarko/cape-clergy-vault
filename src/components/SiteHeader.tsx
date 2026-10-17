@@ -3,6 +3,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
+import crestAsset from "@/assets/logo-diocese-of-cape-town.png.asset.json";
 
 export function SiteHeader() {
   const [email, setEmail] = useState<string | null>(null);
@@ -37,7 +38,9 @@ export function SiteHeader() {
     <header className="border-b border-border bg-card/80 backdrop-blur">
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-4">
         <Link to="/" className="flex items-center gap-3">
-          <span className="font-serif text-3xl leading-none text-primary">✠</span>
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-gold/30 bg-crest">
+            <img src={crestAsset.url} alt="Coat of arms of the Anglican Diocese of Cape Town" className="h-8 w-auto" />
+          </span>
           <span className="min-w-0 leading-tight">
             <span className="block font-serif text-lg font-semibold">TEFT Repository</span>
             <span className="block text-xs text-muted-foreground">Theological Education Formation and Training</span>
