@@ -217,6 +217,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      can_reply_chat: { Args: { _owner: string }; Returns: boolean }
       has_chat_consent: { Args: { _uid: string }; Returns: boolean }
       has_popia_consent: { Args: { _uid: string }; Returns: boolean }
       has_role: {
