@@ -36,6 +36,13 @@
       "when": 1792221822183,
       "tag": "0004_chat_reply_policy",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1792222471595,
+      "tag": "0005_chat_notification_preferences",
+      "breakpoints": true
     }
   ]
 }
