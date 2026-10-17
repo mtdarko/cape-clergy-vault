@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Theological Repository — Dean of Theological Studies, Cape Town" },
+      { title: "Theological Repository — TEFT, Cape Town" },
       { name: "description", content: "Clergy of the Anglican Diocese of Cape Town register, acknowledge POPIA, and submit theological documents and ideas to the Dean." },
       { property: "og:title", content: "Theological Repository — Anglican Diocese of Cape Town" },
       { property: "og:description", content: "A secure place for clergy to submit documents and ideas to the Dean of Theological Studies." },
@@ -26,7 +26,7 @@ function Index() {
   return (
     <main>
       <section className="mx-auto max-w-6xl px-6 pb-16 pt-20">
-        <p className="text-sm uppercase tracking-[0.25em] text-gold">Office of the Dean of Theological Studies</p>
+        <p className="text-sm uppercase tracking-[0.25em] text-gold">Theological Education Formation and Training (TEFT)</p>
         <h1 className="mt-4 max-w-3xl text-5xl font-semibold leading-tight text-primary md:text-6xl">
           A repository for the theological work of our clergy
         </h1>

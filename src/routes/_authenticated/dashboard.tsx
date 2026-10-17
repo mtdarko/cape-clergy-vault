@@ -14,7 +14,7 @@ import { POPIA_VERSION, submissionSchema, fileAllowed } from "@/lib/popia";
 import { StatusBadge, openFile } from "@/components/submission-utils";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
-  head: () => ({ meta: [{ title: "My submissions — Theological Repository" }, { name: "description", content: "Submit documents and ideas to the Dean." }] }),
+  head: () => ({ meta: [{ title: "My submissions — Theological Repository" }, { name: "description", content: "Submit documents and ideas to the Dean." }, { property: "og:title", content: "My submissions — Theological Repository" }, { property: "og:description", content: "Submit documents and ideas to the Dean." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
   component: Dashboard,
 });
 
@@ -25,8 +25,9 @@ function useProfile() {
     queryKey: ["profile"],
     queryFn: async () => {
       const { data: u } = await supabase.auth.getUser();
-      const { data } = await supabase.from("profiles").select("*").eq("id", u.user!.id).maybeSingle();
-      return { user: u.user!, profile: data };
+      if (!u.user) throw new Error("Please sign in again");
+      const { data } = await supabase.from("profiles").select("*").eq("id", u.user.id).maybeSingle();
+      return { user: u.user, profile: data };
     },
   });
 }
@@ -34,7 +35,7 @@ function useProfile() {
 function Dashboard() {
   const { data, isLoading } = useProfile();
   if (isLoading || !data) return <main className="mx-auto max-w-5xl px-6 py-12 text-muted-foreground">Loading…</main>;
-  if (!data.profile?.popia_accepted_at) return <ConsentGate userId={data.user.id} initial={data.profile} />;
+  if (!data.profile?.popia_accepted_at || data.profile.popia_version !== POPIA_VERSION) return <ConsentGate userId={data.user.id} initial={data.profile} />;
   return (
     <main className="mx-auto max-w-5xl px-6 py-12">
       <h1 className="text-4xl font-semibold text-primary">Peace be with you, {data.profile.title} {data.profile.full_name}</h1>
@@ -139,7 +140,8 @@ function MySubmissions() {
     queryKey: ["mine"],
     queryFn: async () => {
       const { data: u } = await supabase.auth.getUser();
-      const { data } = await supabase.from("submissions").select("*").eq("user_id", u.user!.id).order("created_at", { ascending: false });
+      if (!u.user) throw new Error("Please sign in again");
+      const { data } = await supabase.from("submissions").select("*").eq("user_id", u.user.id).order("created_at", { ascending: false });
       return data ?? [];
     },
   });

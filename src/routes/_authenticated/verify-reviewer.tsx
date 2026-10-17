@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { verifyDean } from "@/lib/reviewer.functions";
 
 export const Route = createFileRoute("/_authenticated/verify-reviewer")({
-  head: () => ({ meta: [{ title: "Verify reviewer account — Theological Repository" }, { name: "description", content: "Confirm the Dean's account before review access is granted." }] }),
+  head: () => ({ meta: [{ title: "Verify reviewer account — Theological Repository" }, { name: "description", content: "Confirm the Dean's account before review access is granted." }, { property: "og:title", content: "Verify reviewer account — Theological Repository" }, { property: "og:description", content: "Confirm the Dean's account before review access is granted." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
   component: Verify,
 });
 

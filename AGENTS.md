@@ -17,3 +17,7 @@
 - Reviewer (admin) role is granted only by server fn `verifyDean`: email must be in service-only `reviewer_invites` and the session must come from a fresh emailed code. Why: proves control of the authorised mailbox.
 - All document downloads go through `getDownloadUrl` (RLS re-check + audit). Revocation deletes the role and bans the user 1h to kill sessions. Why: per-request enforcement and traceability.
 - `audit_log` is append-only (triggers block update/delete/truncate); alerts are computed from it and carry IDs/counts only. Why: tamper-evidence without leaking confidential content.
+
+- Private chat uses one owner-scoped message stream per clergy account, RLS, current notice consent and live reviewer roles; no client edits or deletions. Why: shared TEFT review access without exposing conversations to other clergy.
+- Chat is loaded through authenticated route query options and refreshed while open. Why: keep initial loading and permission rechecks consistent.
+- Home-screen installation uses a manifest and local icons only, without an app-shell service worker. Why: installability without offline caching or stale preview risk.
